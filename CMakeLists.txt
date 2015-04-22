@@ -9,12 +9,12 @@ project (alps-python CXX)
 message ("\nALPSCore module : ${PROJECT_NAME}\n")
 
 # add common modules from ../common/cmake
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../common/cmake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/./common/cmake)
 
 # add common definitions
 include(ALPSCommonModuleDefinitions)
 
-gen_documentation()
+#gen_documentation()  # fixme : relative paths from alpscore
 
 if (DocumentationOnly)
   return()
@@ -39,9 +39,8 @@ set(BOOST_LIBRARY_LIST chrono program_options filesystem system)
 if(ENABLE_MPI)
   list(APPEND BOOST_LIBRARY_LIST mpi)
 endif(ENABLE_MPI)
-if(ALPS_HAVE_PYTHON)
-  list(APPEND BOOST_LIBRARY_LIST python)
-endif(ALPS_HAVE_PYTHON)
+  
+list(APPEND BOOST_LIBRARY_LIST python)
 add_boost(${BOOST_LIBRARY_LIST})
 
 add_hdf5()
@@ -52,5 +51,5 @@ add_this_package()
 add_testing()
 
 gen_pkg_config()
-gen_header_only_find_module(alps/utilities/boost_python.hpp) 
+#gen_header_only_find_module(alps/utilities/boost_python.hpp)  # fixme : relative paths from alpscore 
 
